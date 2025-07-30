@@ -1,0 +1,160 @@
+body {
+  background: linear-gradient(135deg, #fffbe6 0%, #fff8d6 100%);
+  font-family: "Segoe UI", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.timer-container {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 60px 80px;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  transition: transform 0.2s ease;
+}
+
+.timer-container:hover {
+  transform: translateY(-2px);
+}
+h1 {
+  display: none; /* 隱藏原本的 h1 */
+}
+#display {
+  font-size: 2.5em;
+  margin: 20px 0;
+  color: #333;
+  letter-spacing: 2px;
+}
+input[type="number"] {
+  width: 60px;
+  font-size: 1.2em;
+  margin-right: 8px;
+}
+button {
+  background: linear-gradient(135deg, #e6b800 0%, #d4a500 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 15px 30px;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(230, 184, 0, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #d4a500 0%, #c9a100 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(230, 184, 0, 0.4);
+}
+
+button:active {
+  transform: translateY(0);
+}
+.egg-title {
+  display: block;
+  margin: 0 auto 24px auto;
+  max-width: 480px;
+  width: 100%;
+  height: auto;
+}
+
+.description {
+  color: #666;
+  font-size: 0.9em;
+  font-weight: bold;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.back-button-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.back-btn {
+  background: #666;
+  padding: 10px 20px;
+  font-size: 0.9em;
+  border-radius: 8px;
+}
+
+.back-btn:hover {
+  background: #555;
+}
+
+.sound-control {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.sound-control label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.sound-control input[type="checkbox"] {
+  margin: 0;
+}
+.done-message,
+#hard-timer,
+#medium-timer,
+#soft-timer {
+  font-size: 1.2em !important;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .timer-container {
+    padding: 40px 30px;
+    margin: 10px;
+  }
+  
+  .egg-title {
+    max-width: 300px;
+  }
+  
+  button {
+    padding: 12px 24px;
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .timer-container {
+    padding: 30px 20px;
+  }
+  
+  .egg-title {
+    max-width: 250px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+}

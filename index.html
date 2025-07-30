@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>雞蛋計時器</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="timer-container">
+      <!-- 將 h1 改成圖片 -->
+      <img src="egg_timer.jpg" alt="EGG TIMER" class="egg-title" />
+      <p class="description"> | 完美煮蛋計時器 - 軟嫩、半熟、全熟，隨你選擇！|</p>
+      <button id="startBtn">開始計時</button>
+    </div>
+    <script>
+      document.getElementById("startBtn").onclick = function () {
+        window.location.href = "timer.html";
+      };
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
