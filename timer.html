@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>雞蛋計時器</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .egg-section {
+        margin-bottom: 48px;
+        text-align: center;
+      }
+      .egg-img {
+        max-width: 320px;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto 16px auto;
+      }
+      .egg-btn {
+        background: #e6b800;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 24px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .egg-btn:hover {
+        background: #c9a100;
+      }
+      .timer-container {
+        display: flex;
+        justify-content: center;
+        gap: 48px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="back-button-container">
+      <button onclick="window.location.href='index.html'" class="back-btn">← 返回首頁</button>
+    </div>
+    <div class="sound-control">
+      <label>
+        <input type="checkbox" id="soundToggle" checked> 
+        🔔 播放提醒音
+      </label>
+    </div>
+    <h1 style="text-align: center; color: #e6b800; margin-bottom: 40px">
+      你要哪一種水煮蛋
+    </h1>
+    <div class="timer-container">
+      <div class="egg-section">
+        <img src="hard.jpg" alt="hard Boiled Egg" class="egg-img" />
+        <button class="egg-btn" id="startBtn1">全熟蛋</button>
+        <div
+          id="hard-timer"
+          style="
+            font-size: 2em;
+            color: #e6b800;
+            margin-top: 16px;
+            display: none;
+          "
+        >
+          10:00
+        </div>
+      </div>
+      <div class="egg-section">
+        <img src="medium.jpg" alt="Medium Boiled Egg" class="egg-img" />
+        <button class="egg-btn" id="startBtn2">半熟蛋</button>
+        <div
+          id="medium-timer"
+          style="
+            font-size: 2em;
+            color: #e6b800;
+            margin-top: 16px;
+            display: none;
+          "
+        >
+          07:00
+        </div>
+      </div>
+      <div class="egg-section">
+        <img src="soft.jpg" alt="Soft Boiled Egg" class="egg-img" />
+        <button class="egg-btn" id="startBtn3">糖心蛋</button>
+        <div
+          id="soft-timer"
+          style="
+            font-size: 2em;
+            color: #e6b800;
+            margin-top: 16px;
+            display: none;
+          "
+        >
+          05:00
+        </div>
+      </div>
+    </div>
+    <script>
+      // 倒數計時器功能
+      let hardTimerInterval = null;
+      let mediumTimerInterval = null;
+      let softTimerInterval = null;
+      
+      // 建立音檔物件
+      const dingSound = new Audio("ding.mp3");
+      
+      // 播放音檔的函式
+      function playDingSound() {
+        const soundToggle = document.getElementById('soundToggle');
+        if (!soundToggle.checked) return; // 如果關閉音效就不播放
+        
+        dingSound.pause();
+        dingSound.currentTime = 0;
+        
+        dingSound.play()
+          .then(() => {
+            console.log("✅ 聲音播放成功");
+          })
+          .catch((err) => {
+            console.error("播放失敗：", err);
+          });
+      }
+      
+      // 預載音檔（在用戶互動時）
+      function preloadAudio() {
+        dingSound.load();
+      }
+
+      document.getElementById("startBtn1").onclick = function () {
+        preloadAudio(); // 預載音檔
+        const timerDiv = document.getElementById("hard-timer");
+        timerDiv.style.display = "block";
+        timerDiv.textContent = "10:00";
+        if (hardTimerInterval) clearInterval(hardTimerInterval);
+        hardTimerInterval = setInterval(() => {
+          let timeArr = timerDiv.textContent.split(":");
+          let seconds =
+            parseInt(timeArr[0], 10) * 60 + parseInt(timeArr[1], 10) - 1;
+          const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+          const s = String(seconds % 60).padStart(2, "0");
+          timerDiv.textContent = `${m}:${s}`;
+          if (seconds <= 0) {
+            clearInterval(hardTimerInterval);
+            timerDiv.textContent = "雞蛋好了！";
+            playDingSound(); // 播放音檔
+          }
+        }, 1000);
+      };
+
+      document.getElementById("startBtn2").onclick = function () {
+        preloadAudio(); // 預載音檔
+        const timerDiv = document.getElementById("medium-timer");
+        timerDiv.style.display = "block";
+        timerDiv.textContent = "07:00";
+        if (mediumTimerInterval) clearInterval(mediumTimerInterval);
+        mediumTimerInterval = setInterval(() => {
+          let timeArr = timerDiv.textContent.split(":");
+          let seconds =
+            parseInt(timeArr[0], 10) * 60 + parseInt(timeArr[1], 10) - 1;
+          const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+          const s = String(seconds % 60).padStart(2, "0");
+          timerDiv.textContent = `${m}:${s}`;
+          if (seconds <= 0) {
+            clearInterval(mediumTimerInterval);
+            timerDiv.textContent = "雞蛋好了！";
+            playDingSound(); // 播放音檔
+          }
+        }, 1000);
+      };
+
+      document.getElementById("startBtn3").onclick = function () {
+        preloadAudio(); // 預載音檔
+        const timerDiv = document.getElementById("soft-timer");
+        timerDiv.style.display = "block";
+        timerDiv.textContent = "05:00";
+        if (softTimerInterval) clearInterval(softTimerInterval);
+        softTimerInterval = setInterval(() => {
+          let timeArr = timerDiv.textContent.split(":");
+          let seconds =
+            parseInt(timeArr[0], 10) * 60 + parseInt(timeArr[1], 10) - 1;
+          const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+          const s = String(seconds % 60).padStart(2, "0");
+          timerDiv.textContent = `${m}:${s}`;
+          if (seconds <= 0) {
+            clearInterval(softTimerInterval);
+            timerDiv.textContent = "雞蛋好了！";
+            playDingSound(); // 播放音檔
+          }
+        }, 1000);
+      };
+    </script>
+  </body>
+</html>
